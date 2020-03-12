@@ -50,16 +50,16 @@
         </div>
 
         <div class="container">
-           <div id="myDiv" class="row mt-3">
+           <div id="myDiv" class="row mt-3 text-white bg-dark">
             
             <% for (var i =0; i<data.length;i++) { %>
                 
-                    <div class="col-2 mt-3"><input type="checkbox" value="<%= data[i]._id %> " class="check"></div>
+                    <div class="col-2 my-3"><input type="checkbox" value="<%= data[i]._id %> " class="check"></div>
 
-                    <div class="col-6 mt-3"><p class="d-inline data"> <%= data[i].todoData %></p></div>
+                    <div class="col-6 my-3"><p class="d-inline data"> <%= data[i].todoData %></p></div>
                     
                 
-                    <div class="col-4 mt-3"><form action="/delete/<%= data[i]._id %> " method="POST" class="d-inline">
+                    <div class="col-4 my-3"><form action="/delete/<%= data[i]._id %> " method="POST" class="d-inline">
                     
                     
                     
