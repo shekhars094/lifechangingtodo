@@ -15,12 +15,18 @@
 
         <div class="container">
 
-            <div class="row jumbotron mb-6 ">
+            <div class="row jumbotron mb-6">
                 <div class="col">
                     <h1 class="text-center" style="text-align: center;">Life Changing TODO</h1>
                 </div>
                 
               </div>
+
+
+
+
+
+
 
 
 
@@ -50,8 +56,8 @@
                 <div class="col">
                 <form action="/delete/<%= data[i]._id %> " method="POST">
                     
-                    <input type="checkbox" value="<%= data[i]._id %> " id="check" onclick="strikeon()">
-                    <p class="d-inline" id="data"> <%= data[i].todoData %></p>
+                    <input type="checkbox" value="<%= data[i]._id %> " class="check">
+                    <p class="d-inline data"> <%= data[i].todoData %></p>
                     <button class="btn btn-danger" type="submit">Delete</button>
                     
                 </form>
@@ -64,51 +70,37 @@
         </div>
 
 
-        
-        
-
-
-
-        
-
         <script>
 
 
 
-            var check = document.getElementById("check");
-            var data = document.getElementById("data");
-            var checkValue = check.value;
-
-            
-
-                
-            
-                
+            var check = document.getElementsByClassName("check");
+            var data = document.getElementsByClassName("data");
 
 
+
+
+            for (let i =0 ; i<check.length; i++) {
+                check[i].onclick = function(e) {
 
                 
+                var checkValue = e.target.value;
 
-            
+                console.log(i)
+  
 
-           
-            
-            
-            function strikeon() {
-
-                if (check.checked === true) {
-                data.style.textDecoration = "line-through";
-            } else {
-                data.style.textDecoration = "none";
-            }
+            //     if (e.target.checked === true) {
+            //     data[i].style.textDecoration = "line-through";
+            // } else {
+            //     data[i].style.textDecoration = "none";
+            // }
 
                 
 
-                if (check.checked === true) {
-                data.style.textDecoration = "line-through";
-                
+                if (e.target.checked === true) {
+                data[i].style.textDecoration = "line-through";
 
-                var sendData = {completed: check.checked};
+                var sendData = {completed: e.target.checked};
 
 
                 fetch("/update/"+checkValue, {
@@ -127,8 +119,8 @@
 
            else
             {
-                var sendData = {completed: check.checked};
-                data.style.textDecoration = "none";
+                var sendData = {completed: e.target.checked};
+                data[i].style.textDecoration = "none";
                 fetch("/update/"+checkValue, {
                     method: "post",
                     body: JSON.stringify(sendData),
@@ -141,6 +133,9 @@
                 }).catch();
             }
             }
+            }
+
+            
 
             
             
@@ -157,5 +152,6 @@
 
 
         </script>
+
     </body>
 </html>
