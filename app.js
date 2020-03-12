@@ -1,4 +1,5 @@
 const path = require("path");
+require("dotenv").config();
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -23,7 +24,7 @@ app.set("view engine", "ejs");
 // Database Conncection
 
 mongoose
-    .connect("mongodb://localhost:27017/lifetodos", {
+    .connect(process.env.MONGODB_URI || "mongodb://localhost:27017/lifetodos", {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
