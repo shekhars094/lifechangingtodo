@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+        />
+        <title>Todo App</title>
+    </head>
+    <body>
+
+        <div class="container">
+
+            <div class="row jumbotron mb-6 ">
+                <div class="col">
+                    <h1 class="text-center" style="text-align: center;">Life Changing TODO</h1>
+                </div>
+                
+              </div>
+
+
+
+
+            <div class="row">
+                <div class="col d-flex justify-content-center">
+                    <form action="/" method="POST">
+                        <input type="text" name="todoData" />
+                        <input type="submit" value="Add" class="btn btn-success"/>
+                    </form>
+                </div>
+                
+            </div>
+            
+    
+            
+                
+
+
+
+        </div>
+
+        <div class="container">
+            
+            <% for (var i =0; i<data.length;i++) { %>
+                <div id="myDiv" class="row">
+                <div class="col">
+                <form action="/delete/<%= data[i]._id %> " method="POST">
+                    
+                    <input type="checkbox" value="<%= data[i]._id %> " id="check" onclick="strikeon()">
+                    <p class="d-inline" id="data"> <%= data[i].todoData %></p>
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                    
+                </form>
+
+
+              <%  } %>
+            </div>
+            
+        </div>
+        </div>
+
+
+        
+        
+
+
+
+        
+
+        <script>
+
+
+
+            var check = document.getElementById("check");
+            var data = document.getElementById("data");
+            var checkValue = check.value;
+
+            
+
+                
+            
+                
+
+
+
+                
+
+            
+
+           
+            
+            
+            function strikeon() {
+
+                if (check.checked === true) {
+                data.style.textDecoration = "line-through";
+            } else {
+                data.style.textDecoration = "none";
+            }
+
+                
+
+                if (check.checked === true) {
+                data.style.textDecoration = "line-through";
+                
+
+                var sendData = {completed: check.checked};
+
+
+                fetch("/update/"+checkValue, {
+                    method: "post",
+                    body: JSON.stringify(sendData),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    }
+                }).then().then(data => {
+
+                }).catch();
+
+
+            } 
+
+           else
+            {
+                var sendData = {completed: check.checked};
+                data.style.textDecoration = "none";
+                fetch("/update/"+checkValue, {
+                    method: "post",
+                    body: JSON.stringify(sendData),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    }
+                }).then((res) => res.json()).then(data => {
+
+                }).catch();
+            }
+            }
+
+            
+            
+
+
+
+
+
+
+
+
+
+
+
+
+        </script>
+    </body>
+</html>
